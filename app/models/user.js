@@ -35,9 +35,14 @@ User.authenticate = function(o, cb){
   });
 };
 
+User.find = function(filter, cb){
+  User.collection.find(filter).toArray(cb);
+};
+
 User.prototype.save = function(o, cb){
   var properties = Object.keys(o),
-      self = this;
+      self       = this;
+
   // Loops through the form properties (req.body OR 'o') & merges it with res.locals.user
   properties.forEach(function(property){
     switch(property){
@@ -53,4 +58,3 @@ User.prototype.save = function(o, cb){
 };
 
 module.exports = User;
-

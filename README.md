@@ -1,14 +1,14 @@
-## name of project
+## Facebook for Goats
 ### Code Badges
-build status icon
-coverage status icon
+[![Build Status](https://travis-ci.org/mlfryman/facebook.svg?branch=master)](https://travis-ci.org/mlfryman/facebook)
+[![Coverage Status](https://coveralls.io/repos/mlfryman/facebook/badge.png?branch=master)](https://coveralls.io/r/mlfryman/facebook?branch=master)
 
 ### About
-write a description about your project
+This app is going to change the world by helping goats all over the world reunite with their families and friends.
 
 ### Models
 ```
-Model 1
+User
 prop-a
 prop-b
 .classMethod-c
@@ -35,8 +35,8 @@ $ npm test
 ```
 
 ### Contributors
-- [Chyld Medford](https://github.com/chyld)
+- [Melanie Fryman](https://github.com/mlfryman)
 
 ### License
-[MIT](LICENSE)
+- [MIT](LICENSE)
 

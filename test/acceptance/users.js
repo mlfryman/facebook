@@ -57,5 +57,38 @@ describe('users', function(){
       });
     });
   });
+
+  describe('get /profile', function(){
+    it('should show the user\'s profile page', function(done){
+      request(app)
+      .get('/profile')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('bob@aol.com');
+        expect(res.text).to.include('Email');
+        expect(res.text).to.include('Phone');
+        expect(res.text).to.include('Facebook');
+        done();
+      });
+    });
+  });
+
+  describe('get /users', function(){
+    it('should show all public users', function(done){
+      request(app)
+      .get('/users')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('bob@aol.com');
+        expect(res.text).to.include('sam@aol.com');
+        expect(res.text).to.not.include('sue@aol.com');
+        done();
+      });
+    });
+  });
+
+// Last bracket
 });
 

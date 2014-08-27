@@ -8,8 +8,10 @@ html(lang='en')
     link(href='//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/flatly/bootstrap.min.css', rel='stylesheet')
     link(rel='stylesheet', href='/css/style.css')
   body
-    include nav
     .container-fluid
+      .row
+        .col-xs-12
+          include nav
       .row
         .col-xs-12
           block content

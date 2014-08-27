@@ -1,0 +1,35 @@
+extends ../shared/template
+block content
+  .container
+    #banner.page-header
+      .row
+        .col-xs-12
+          h1= user.name
+          h3= user.tagline
+    .row
+      .col-xs-5
+        .panel.panel-primary
+          .panel-heading
+            h3.panel-title: a(href='/profile/edit') Edit Profile
+          .panel-body
+            ul.list-group
+              li.list-group-item
+                | Email:&nbsp
+                | #{user.email}
+              li.list-group-item
+                | Phone:&nbsp
+                | #{user.phone}
+              li.list-group-item
+                | Facebook:&nbsp
+                a(href=user.facebook, target='_blank')= user.facebook
+              li.list-group-item
+                | Twitter:&nbsp
+                a(href=user.twitter, target='_blank')= user.twitter
+              li.list-group-item
+                | Visible?:&nbsp
+                | #{user.isVisible}
+      .col-xs-2
+      .col-xs-5
+        .photo
+          a.thumbnail(href='#')
+            img(src=user.photo)
