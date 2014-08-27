@@ -1,18 +1,38 @@
 {
-  "_id" : {"$oid":"000000000000000000000001"},
-  "email" : "bob@aol.com",
-  "password" : "$2a$10$XR.IQktUUujLBxed70GQn.jWY1wZ9ThM0Tar9wTqzkI4Uk1uP2Or2",
-  "isVisible" : true
+    "_id" : {"$oid":"000000000000000000000001"},
+    "email" : "bob_goat@aol.com",
+    "password" : "$2a$10$XR.IQktUUujLBxed70GQn.jWY1wZ9ThM0Tar9wTqzkI4Uk1uP2Or2",
+    "isVisible" : true,
+    "name" : "Bob Goat",
+    "phone" : "(615) 973-8933",
+    "photo" : "http://4.bp.blogspot.com/_Sh3smLghY2g/TNKxDb091WI/AAAAAAAABMA/4M5iluTvXgY/s1600/scarey+goat.jpg",
+    "tagline" : "Swag, I haz it.",
+    "facebook" : "bob_goat",
+    "twitter" : "@bob_goat"
 }
+
 {
-  "_id" : {"$oid":"000000000000000000000002"},
-  "email" : "sam@aol.com",
-  "password" : "$2a$10$XR.IQktUUujLBxed70GQn.jWY1wZ9ThM0Tar9wTqzkI4Uk1uP2Or2",
-  "isVisible" : true
+    "_id" : {"$oid":"000000000000000000000002"},
+    "email" : "suzi@aol.com",
+    "password" : "$2a$10$Ya6q4vTUfFwFbiNApxUCkeW.ex7JA14z0TSZ0DEXMh77tdzi5ALsC",
+    "isVisible" : true,
+    "name" : "Suzi del Goat",
+    "phone" : "(555) 888-8808",
+    "photo" : "http://www.kelownasjuicytips.com/wp-content/uploads/2011/03/Aug-8-goat-eats-at-KLO-Orchards-300x225.jpg",
+    "tagline" : "Wat?!",
+    "facebook" : "suz",
+    "twitter" : "@suz"
 }
+
 {
-  "_id" : {"$oid":"000000000000000000000003"},
-  "email" : "sue@aol.com",
-  "password" : "$2a$10$sjPx9TkrEASeXzH6uuDCDO.n1Sj/H2A/bu/9hBFfm5fm3Z4LzrEPa",
-  "isVisible" : false
+    "_id" : {"$oid":"000000000000000000000003"},
+    "email" : "sgoatly@aol.com",
+    "password" : "$2a$10$/gFvDMZYwvC2LRIWKJmoO.zPzTU7kZi/pVr0.pCdLhGB2.DzJoUei",
+    "isVisible" : false,
+    "name" : "Sir Goatly",
+    "phone" : "(555) 123-4567",
+    "photo" : "http://cdn.oxwordsblog.wpfuel.co.uk/wpcms/wp-content/uploads/Grinning-goat-300x225.jpg",
+    "tagline" : "I am a noble beast.",
+    "facebook" : "sir-goatly",
+    "twitter" : "@sir-goatly"
 }

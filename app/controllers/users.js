@@ -40,6 +40,7 @@ exports.authenticate = function(req, res){
     }
   });
 };
+
 exports.edit = function(req, res){
   res.render('users/edit');
 };
@@ -57,5 +58,24 @@ exports.show = function(req, res){
 exports.index = function(req, res){
   User.find({isVisible:true}, function(err, users){
     res.render('users/index', {users:users});
+  });
+};
+
+exports.client = function(req, res){
+  User.findOne({email:req.params.email, isVisible:true}, function(err, client){
+    if(client){
+      res.render('users/client', {client:client});
+    }else{
+      res.redirect('/users');
+    }
+  });
+};
+
+// TODO: can add find(filter by _id, isVisible), need to convert id to MongoID
+exports.message = function(req, res){
+  User.findById(req.params.userId, function(err, receiver){
+    res.locals.user.send(receiver, req.body, function(){
+      res.redirect('/users/' + receiver.email);
+    });
   });
 };

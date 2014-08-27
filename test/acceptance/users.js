@@ -19,7 +19,7 @@ describe('users', function(){
     cp.execFile(__dirname + '/../scripts/clean-db.sh', [process.env.DB], {cwd:__dirname + '/../scripts'}, function(err, stdout, stderr){
       request(app)
       .post('/login')
-      .send('email=bob@aol.com')
+      .send('email=bob_goat@aol.com')
       .send('password=1234')
       .end(function(err, res){
         cookie = res.headers['set-cookie'][0];
@@ -35,7 +35,7 @@ describe('users', function(){
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);
-        expect(res.text).to.include('bob@aol.com');
+        expect(res.text).to.include('bob_goat@aol.com');
         expect(res.text).to.include('Email');
         expect(res.text).to.include('Phone');
         expect(res.text).to.include('Public');
@@ -48,7 +48,7 @@ describe('users', function(){
     it('should edit the profile', function(done){
       request(app)
       .post('/profile')
-      .send('_method=put&visible=private&email=bob%40aol.com&phone=123456789&photo=photourl&tagline=so+cool&facebook=facebookurl&twitter=twitterurl')
+      .send('_method=put&visible=public&email=bob_goat%40aol.com&phone=6159738933&photo=photourl&tagline=so+cool&facebook=facebookurl&twitter=twitterurl')
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
@@ -65,7 +65,7 @@ describe('users', function(){
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);
-        expect(res.text).to.include('bob@aol.com');
+        expect(res.text).to.include('bob_goat@aol.com');
         expect(res.text).to.include('Email');
         expect(res.text).to.include('Phone');
         expect(res.text).to.include('Facebook');
@@ -81,9 +81,47 @@ describe('users', function(){
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);
-        expect(res.text).to.include('bob@aol.com');
-        expect(res.text).to.include('sam@aol.com');
-        expect(res.text).to.not.include('sue@aol.com');
+        expect(res.text).to.include('bob_goat@aol.com');
+        expect(res.text).to.include('suzi@aol.com');
+        expect(res.text).to.not.include('sgoatly@aol.com');
+        done();
+      });
+    });
+  });
+
+  describe('get /users/bob_goat@aol.com', function(){
+    it('should show a specific user', function(done){
+      request(app)
+      .get('/users/bob_goat@aol.com')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('bob_goat@aol.com');
+        done();
+      });
+    });
+
+    it('should NOT show a specific user - not public', function(done){
+      request(app)
+      .get('/users/sgoatly@aol.com')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/users');
+        done();
+      });
+    });
+  });
+
+  describe('post /message/3', function(){
+    it('should send a user a message', function(done){
+      request(app)
+      .post('/message/000000000000000000000002')
+      .set('cookie', cookie)
+      .send('mtype=text&message=hey')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/users/suzi@aol.com');
         done();
       });
     });

@@ -1,0 +1,61 @@
+extends ../shared/template
+block content
+  .container
+    #banner.page-header
+      .row
+        .col-xs-12
+          h1= client.name
+          h3= client.tagline
+    .row
+      .col-xs-5
+        .photo
+          a.thumbnail(href='#')
+            img(src=client.photo)
+    .row
+      .col-xs-5
+        .panel.panel-info
+          .panel-heading
+            h3.panel-title #{client.name}'s Profile
+          .panel-body
+            ul.list-group
+              li.list-group-item
+                | Email:&nbsp
+                | #{client.email}
+              li.list-group-item
+                | Phone:&nbsp
+                | #{client.phone}
+              li.list-group-item
+                | Facebook:&nbsp
+                a(href=client.facebook, target='_blank')= client.facebook
+              li.list-group-item
+                | Twitter:&nbsp
+                a(href=client.twitter, target='_blank')= client.twitter
+              li.list-group-item
+                | Visible?:&nbsp
+                | #{client.isVisible}
+      .col-xs-2
+      .col-xs-5
+        .panel.panel-primary
+          .panel-heading
+            h3.panel-title Send Message to #{client.name}
+          .panel-body
+            form(role='form', method='post', action='/message/#{client._id}')
+              .radio
+                label
+                  input(type='radio' name='mtype' value='text' checked=true)
+                  span Text
+              .radio
+                label
+                  input(type='radio' name='mtype' value='email')
+                  span Email
+              .radio
+                label
+                  input(type='radio' name='mtype' value='internal')
+                  span Internal
+              .form-group
+                label(for='message') Message
+                textarea.form-control#message(name='message')
+              button.btn.btn-success(type='submit') Send Message
+      .col-xs-7
+
+block scripts
