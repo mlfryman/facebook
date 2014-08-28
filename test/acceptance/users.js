@@ -113,12 +113,23 @@ describe('users', function(){
     });
   });
 
-  describe('post /message/3', function(){
+  describe('post /message/userId', function(){
     it('should send a user a message', function(done){
       request(app)
       .post('/message/000000000000000000000002')
       .set('cookie', cookie)
       .send('mtype=text&message=hey')
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/users/suzi@aol.com');
+        done();
+      });
+    });
+    it('should send an email message to recipient', function(done){
+      request(app)
+      .post('/message/000000000000000000000002')
+      .send('mtype=email&message=hey')
+      .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
         expect(res.headers.location).to.equal('/users/suzi@aol.com');
