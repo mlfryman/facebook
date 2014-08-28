@@ -2,7 +2,9 @@
 
 var bcrypt = require('bcrypt'),
     Mongo  = require('mongodb'),
-    _      = require('lodash');
+    _      = require('lodash'),
+    twilio  = require('twilio'),
+    Mailgun = require('mailgun-js');
 
 function User(){
 }
@@ -66,7 +68,7 @@ User.prototype.send = function(receiver, data, cb){
       sendText(receiver.phone, data.message, cb);
       break;
     case 'email':
-      sendEmail(this, receiver.email, data.message, cb);
+      sendEmail(this.email, receiver.email, 'Message from Facebook', data.message, cb);
       break;
     case 'internal':
   }
@@ -82,20 +84,14 @@ function sendText(to, body, cb){
   var accountSid = process.env.TWSID,
       authToken  = process.env.TWTOK,
       from       = process.env.FROM,
-      client     = require('twilio')(accountSid, authToken);
+      client     = twilio(accountSid, authToken);
 
   client.messages.create({to:to, from:from, body:body}, cb);
 }
 
-function sendEmail(sender, to, body, cb){
-  if(!sender.email || !to){return cb();}
+function sendEmail(from, to, subject, message, cb){
+  var mailgun = new Mailgun({apiKey:process.env.MGAPIKEY, domain:process.env.MGDOMAIN}),
+      data   = {from:from, to:to, subject:subject, text:message};
 
-  var apiKey  = process.env.MGAPIKEY,
-      domain  = process.env.MGDOMAIN,
-      Mailgun = require('mailgun-js'),
-      mg      = new Mailgun({apiKey: apiKey, domain: domain}),
-      subject = 'Hello from ' + sender.name,
-      data    = {from:sender.email, to:to, subject:subject, html:body};
-
-  mg.messages().send(data, cb);
+  mailgun.messages().send(data, cb);
 }

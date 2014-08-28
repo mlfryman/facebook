@@ -13,7 +13,7 @@
 
 {
     "_id" : {"$oid":"000000000000000000000002"},
-    "email" : "suzi@aol.com",
+    "email" : "melanie@frymanet.com",
     "password" : "$2a$10$Ya6q4vTUfFwFbiNApxUCkeW.ex7JA14z0TSZ0DEXMh77tdzi5ALsC",
     "isVisible" : true,
     "name" : "Suzi del Goat",

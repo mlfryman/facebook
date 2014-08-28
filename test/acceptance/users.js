@@ -82,7 +82,7 @@ describe('users', function(){
       .end(function(err, res){
         expect(res.status).to.equal(200);
         expect(res.text).to.include('bob_goat@aol.com');
-        expect(res.text).to.include('suzi@aol.com');
+        expect(res.text).to.include('melanie@frymanet.com');
         expect(res.text).to.not.include('sgoatly@aol.com');
         done();
       });
@@ -121,7 +121,7 @@ describe('users', function(){
       .send('mtype=text&message=hey')
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        expect(res.headers.location).to.equal('/users/suzi@aol.com');
+        expect(res.headers.location).to.equal('/users/melanie@frymanet.com');
         done();
       });
     });
@@ -132,7 +132,7 @@ describe('users', function(){
       .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(302);
-        expect(res.headers.location).to.equal('/users/suzi@aol.com');
+        expect(res.headers.location).to.equal('/users/melanie@frymanet.com');
         done();
       });
     });
