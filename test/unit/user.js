@@ -51,7 +51,19 @@ describe('User', function(){
       });
     });
   });
-
+  // test successful twilio text message
+  describe('#send', function(){
+    it('should send a text message to a user', function(done){
+      User.findById('000000000000000000000001', function(err, sender){ // bob_goat = sender
+        User.findById('000000000000000000000002', function(err, receiver){ // suzi = receiver
+          sender.send(receiver, {mtype:'text', message:'yo'}, function(err, response){ // req.body = {mtype, message}; twilio calls us back in function(err, response) if text sent successfully
+            expect(response.sid).to.be.ok;
+            done();
+          });
+        });
+      });
+    });
+  });
 
 // Last bracket
 });
