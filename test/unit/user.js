@@ -51,22 +51,39 @@ describe('User', function(){
       });
     });
   });
-  // test successful twilio text message
   describe('#send', function(){
+    // test successful Twilio text message
     it('should send a text message to a user', function(done){
       User.findById('000000000000000000000001', function(err, sender){ // bob_goat = sender
         User.findById('000000000000000000000002', function(err, receiver){ // suzi = receiver
-          sender.send(receiver, {mtype:'text', message:'yo'}, function(err, response){ // req.body = {mtype, message}; twilio calls us back in function(err, response) if text sent successfully
+          sender.send(receiver, {mtype:'text', message:'yo, this is a text message'}, function(err, response){ // req.body = {mtype, message}; twilio calls us back in function(err, response) if text sent successfully
+            // console.log('SEND.....', err, response);
             expect(response.sid).to.be.ok;
             done();
           });
         });
       });
     });
+    // test successful Mailgun email message
     it('should send an email message to a user', function(done){
       User.findById('000000000000000000000001', function(err, sender){
         User.findById('000000000000000000000002', function(err, receiver){
-          sender.send(receiver, {mtype:'email', message:'yo'}, function(err, response){
+          sender.send(receiver, {mtype:'email', message:'yo, this is an email message'}, function(err, response){
+            // console.log('SEND.....', err, response);
+            expect(response.id).to.be.ok;
+            done();
+          });
+        });
+      });
+    });
+    // test successful internal message
+    it('should send an internal message to a user', function(done){
+      User.findById('000000000000000000000001', function(err, sender){
+        // console.log('SENDER.....', err, sender);
+        User.findById('000000000000000000000002', function(err, receiver){
+          // console.log('RECIEVER.....', err, receiver);
+          sender.send(receiver, {mtype:'internal', message:'yo, this is an internal message'}, function(err, response){
+            // console.log('SEND INTERNAL.....', err, response);
             expect(response.id).to.be.ok;
             done();
           });

@@ -136,6 +136,17 @@ describe('users', function(){
         done();
       });
     });
+    it('should send an internal message to recipient', function(done){
+      request(app)
+      .post('/message/000000000000000000000002')
+      .send('mtype=internal&message=hey')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/users/melanie@frymanet.com');
+        done();
+      });
+    });
   });
 
 // Last bracket
