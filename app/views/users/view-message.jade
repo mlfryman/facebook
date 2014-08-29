@@ -6,10 +6,14 @@ block content
         .col-xs-12
           h1= user.name
           h3= user.tagline
-    table.table
-        tr
-          td= message.from
-        tr
-          td= message.date
-        tr
-          td= message.body
+    .row
+      .col-xs-3
+      .col-xs-6
+        table.table#message
+          tr
+            td Message From: #{message.from}
+          tr
+            td Date: #{moment(message.date).format('MM/DD/YYYY')}
+            td Time: #{moment(message.date).fromNow()}
+          tr
+            td #{message.body}

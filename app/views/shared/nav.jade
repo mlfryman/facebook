@@ -7,17 +7,17 @@
         span.icon-bar
         span.icon-bar
     #navbar-main.navbar-collapse.collapse
-      ul.nav.navbar-nav.navbar-right
+      ul.nav.navbar-nav.navbar-right.nav-pills
         if user
           li: a(href='/messages') Messages
-          li.unread= user.unreadMessages > 0 ? user.unreadMessages : null
+              span.badge #{(unread > 0) ? unread : null}
           li: a(href='/users') Public Users
           li: a(href='/profile') Profile
           li
             form.navbar-form(method='post', action='/logout')
               .form-group
                 input(type='hidden', name='_method', value='delete')
-                button.btn.btn-danger= user.email
+                button.btn.btn-warning.btn-sm= user.email
         else
           li: a(href='/register') Register
           li: a(href='/login') Login

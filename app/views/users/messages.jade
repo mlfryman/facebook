@@ -5,17 +5,23 @@ block content
       .row
         .col-xs-12
           h2 #{user.name}'s Messages
-    #unread #{ (unread) ? 'You have ' + unread + ' unread message(s)' : 'You have no unread messages.'}
+    .row
+      .col-xs-4
+        #unread.alert.alert-dismissable.alert-danger
+          button.close(type='button', data-dismiss='alert') ×
+          h5 #{ (unread) ? 'You have ' + unread + ' unread message(s)' : 'You have no unread messages.'}
     .row
       .col-xs-6
         table.table
           tr
             th From
-            th Date
+            th: a(href="/messages?sort=#{(sort === 1) ? 1 : sort * -1 }") Date
+            th Time
             th Message
               each message in messages
                 tr(style='font-weight: #{ (message.isRead) ? "normal" : "bold"};')
                   td= message.from
-                  td= message.date
+                  td= moment(message.date).format('MM/DD/YYYY')
+                  td= moment(message.date).fromNow()
                   td: a(href='/message/#{message._id}/view')= message.body.substring(0, 10) + '....'
 
