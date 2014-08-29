@@ -1,6 +1,7 @@
 'use strict';
 
-var User = require('../models/user');
+var User = require('../models/user'),
+    Message = require('../models/message');
 
 exports.new = function(req, res){
   res.render('users/new');
@@ -71,6 +72,7 @@ exports.client = function(req, res){
   });
 };
 
+// Send messages
 // TODO: can add find(filter by _id, isVisible), need to convert id to MongoID
 exports.message = function(req, res){
   User.findById(req.params.userId, function(err, receiver){
@@ -80,3 +82,20 @@ exports.message = function(req, res){
   });
 };
 
+
+//Display all messages to given user
+exports.displayMessages = function(req, res){
+  Message.find(res.locals.user._id, function(err, messages){
+    var unread = 0;
+    messages.forEach(function(m){ unread = (m.isRead) ? unread : unread + 1; });
+    res.render('users/messages', {messages: messages, unread: unread});
+  });
+};
+
+//Display a single message
+exports.readMessage = function(req, res){
+  Message.read(req.params.messageId, function(message){
+    console.log(message);
+    res.render('users/view-message', {message: message});
+  });
+};

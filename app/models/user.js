@@ -46,10 +46,6 @@ User.findOne = function(filter, cb){
   User.collection.findOne(filter, cb);
 };
 
-// TODO: Add .findMessage function
-
-
-
 User.prototype.save = function(o, cb){
   var properties = Object.keys(o),
       self       = this;
@@ -76,8 +72,19 @@ User.prototype.send = function(receiver, data, cb){
       sendEmail(this.email, receiver.email, 'Message from Facebook for Goats', data.message, cb);
       break;
     case 'internal':
-      Message.send(this._id, receiver._id, data.message, cb);
+      sendInternal(this._id, receiver._id, data.message, cb);
   }
+};
+
+User.findUnread = function(id, cb){
+  var _id = Mongo.ObjectID(id);
+  User.collection.findOne({_id:_id}, function(err, obj){
+    Message.unreadCount(obj._id, function(err2, count){
+      obj.unreadMessages = count;
+      console.log('*******user from findById', obj);
+      cb(err, _.create(User.prototype, obj));
+    });
+  });
 };
 
 module.exports = User;
@@ -97,7 +104,15 @@ function sendText(to, body, cb){
 
 function sendEmail(from, to, subject, message, cb){
   var mailgun = new Mailgun({apiKey:process.env.MGAPIKEY, domain:process.env.MGDOMAIN}),
-      data   = {from:from, to:to, subject:subject, text:message};
+      data   = {from:from, to:to, subject:'Message From:' + from, text:message};
 
   mailgun.messages().send(data, cb);
 }
+
+function sendInternal(to, from, body, cb){
+  var m = {to: to, from: from, body: body},
+  message = new Message(m);
+
+  Message.collection.save(message, cb);
+}
+

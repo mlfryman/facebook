@@ -84,7 +84,7 @@ describe('User', function(){
           // console.log('RECIEVER.....', err, receiver);
           sender.send(receiver, {mtype:'internal', message:'yo, this is an internal message'}, function(err, response){
             // console.log('SEND INTERNAL.....', err, response);
-            expect(response.id).to.be.ok;
+            expect(response).to.be.ok;
             done();
           });
         });

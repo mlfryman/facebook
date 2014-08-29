@@ -1,0 +1,15 @@
+extends ../shared/template
+block content
+  .container
+    #banner.page-header
+      .row
+        .col-xs-12
+          h1= user.name
+          h3= user.tagline
+    table.table
+        tr
+          td= message.from
+        tr
+          td= message.date
+        tr
+          td= message.body

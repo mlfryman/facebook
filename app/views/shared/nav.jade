@@ -9,9 +9,10 @@
     #navbar-main.navbar-collapse.collapse
       ul.nav.navbar-nav.navbar-right
         if user
-          li: a(href='/users') Users
+          li: a(href='/messages') Messages
+          li.unread= user.unreadMessages > 0 ? user.unreadMessages : null
+          li: a(href='/users') Public Users
           li: a(href='/profile') Profile
-          li: a(href='/profile/edit') Edit Profile
           li
             form.navbar-form(method='post', action='/logout')
               .form-group

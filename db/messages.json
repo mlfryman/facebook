@@ -1,0 +1,17 @@
+{
+    "_id" : {"$oid" :"a00000000000000000000001"},
+    "to" : {"$oid" :"000000000000000000000001"},
+    "from" : "melanie@frymanet.com",
+    "body" : "Howdy Bob!  Wanna go eat some grass over in Farmer Joe's field tonight?",
+    "date" : {"$date" : 1409270400000},
+    "isRead" : false
+}
+
+{
+    "_id" : {"$oid" :"a00000000000000000000002"},
+    "to" : {"$oid" :"000000000000000000000002"},
+    "from" : "bob_goat@aol.com",
+    "body" : "ZOMG! I love grass - let's do it!",
+    "date" : {"$date" : 1409270400099},
+    "isRead" : false
+}

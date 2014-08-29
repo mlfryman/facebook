@@ -47,6 +47,7 @@
     "mongodb": "^1.4.9",
     "morgan": "^1.2.3",
     "multiparty": "^3.3.2",
+    "tablesort": "^1.6.4",
     "twilio": "^1.7.0"
   },
   "devDependencies": {

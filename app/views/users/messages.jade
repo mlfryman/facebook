@@ -1,0 +1,21 @@
+extends ../shared/template
+block content
+  .container
+    #banner.page-header
+      .row
+        .col-xs-12
+          h2 #{user.name}'s Messages
+    #unread #{ (unread) ? 'You have ' + unread + ' unread message(s)' : 'You have no unread messages.'}
+    .row
+      .col-xs-6
+        table.table
+          tr
+            th From
+            th Date
+            th Message
+              each message in messages
+                tr(style='font-weight: #{ (message.isRead) ? "normal" : "bold"};')
+                  td= message.from
+                  td= message.date
+                  td: a(href='/message/#{message._id}/view')= message.body.substring(0, 10) + '....'
+
